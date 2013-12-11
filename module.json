@@ -4,6 +4,7 @@
 	"namespace": "\\modules\\shipping_flat_rate",
 	"config_controller": "administrator\\ShippingFlatRate",
 	"controllers": [
+		"ShippingFlatRate",
 		"administrator\\ShippingFlatRate"
 	],
 	"default_config": {
