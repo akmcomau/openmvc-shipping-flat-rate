@@ -16,7 +16,7 @@ class ShippingFlatRate extends Controller {
 
 	public function shipping() {
 		$cart = new Cart($this->config, $this->database, $this->request);
-		$module_config = $this->config->moduleConfig('Shipping - Flat Rate');
+		$module_config = $this->config->moduleConfig('\modules\shipping_flat_rate');
 		$method = $this->config->siteConfig()->checkout->shipping_methods->flat_rate;
 
 		if ($module_config->free_if_over && $cart->getCartTotal() > $module_config->free_if_over) {
