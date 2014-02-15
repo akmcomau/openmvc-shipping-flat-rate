@@ -14,6 +14,10 @@ use modules\products\widgets\ProductGrid;
 
 class ShippingFlatRate extends Controller {
 
+	public function getAllUrls($include_filter = NULL, $exclude_filter = NULL) {
+		return [];
+	}
+
 	public function shipping() {
 		$cart = new Cart($this->config, $this->database, $this->request);
 		$module_config = $this->config->moduleConfig('\modules\shipping_flat_rate');
