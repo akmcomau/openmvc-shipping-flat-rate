@@ -23,7 +23,16 @@ class ShippingFlatRate extends Controller {
 		$module_config = $this->config->moduleConfig('\modules\shipping_flat_rate');
 		$method = $this->config->siteConfig()->checkout->shipping_methods->flat_rate;
 
-		if ($module_config->free_if_over && $cart->getCartTotal() > $module_config->free_if_over) {
+		$free_shipping = $module_config->free_if_over;
+		try {
+			$exchange_rate = $this->model->getModel('modules\exchange_rates\classes\models\ExchangeRate');
+			if ($free_shipping) {
+				$free_shipping = $exchange_rate->convert($this->config->siteConfig()->currency, $free_shipping);
+			}
+		}
+		catch (\Exception $ex) { }
+
+		if ($free_shipping && $cart->getCartTotal() > $free_shipping) {
 			$cart->setShipping(['flat_rate' => 0]);
 		}
 		else {
